@@ -43,17 +43,20 @@ class MenuItem(models.Model):
     def __str__(self):
         return f"{self.name} - ${self.price}"
 
+    def available(self):
+        return all(X.enough() for X in self.reciperequirement_set.all())
+
 
 class RecipeRequirement(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.FloatField()
 
-    class Meta:
-        unique_together = ("menu_item", "ingredient")
-
     def __str__(self):
         return f"{self.menu_item.name} needs {self.quantity}x {self.ingredient.name}"
+
+    def enough(self):
+        return self.quantity <= self.ingredient.quantity
 
 
 class Purchase(models.Model):
@@ -68,7 +71,7 @@ class Purchase(models.Model):
 
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.menu_item.name} - {self.quantity} @ {self.timestamp}"
