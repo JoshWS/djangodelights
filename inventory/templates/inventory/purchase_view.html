@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <h1>Ingredients</h1>
+    <a href="{% url 'purchase_create' %}">Add a new Ingredient</a>
+    <table>
+        <tbody>
+        {% for Purchase in object_list %}
+        <tr>
+            <td> {{ Purchase.menu_item }}</td>
+            <td> {{ Purchase.quantity }}</td>
+            <td> {{ Purchase.timestamp }}</td>
+            <td>
+                <a href="{% url 'purchase_update' Purchase.id %}">Update</a>
+                <a href="{% url 'purchase_delete' Purchase.id %}">Delete</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">No ingredients yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
