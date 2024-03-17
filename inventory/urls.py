@@ -29,4 +29,16 @@ urlpatterns = [
         PurchaseDeleteView.as_view(),
         name="purchase_delete",
     ),
+    path("menuitems/", MenuItemListView.as_view(), name="menuitems"),
+    path("menuitems/create/", MenuItemCreateView.as_view(), name="menuitem_create"),
+    path(
+        "menuitems/<int:pk>/update/",
+        MenuItemUpdateView.as_view(),
+        name="menuitem_update",
+    ),
+    path(
+        "menuitems/<int:pk>/delete/",
+        MenuItemDeleteView.as_view(),
+        name="menuitem_delete",
+    ),
 ]

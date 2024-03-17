@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <h1>Menu items</h1>
+    <a href="{% url 'menuitem_create' %}">Add a new Ingredient</a>
+    <table>
+        <tbody>
+        {% for MenuItem in object_list %}
+        <tr>
+            <td> {{ MenuItem.name }}</td>
+            <td> {{ MenuItem.price }}</td>
+            <td>
+                <a href="{% url 'menuitem_update' MenuItem.id %}">Update</a>
+                <a href="{% url 'menuitem_delete' MenuItem.id %}">Delete</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="3">No menu items yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}

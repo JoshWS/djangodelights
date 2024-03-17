@@ -63,3 +63,28 @@ class PurchaseUpdateView(UpdateView):
 class PurchasesListView(ListView):
     model = Purchase
     template_name = "inventory/purchase_view.html"
+
+
+class MenuItemDeleteView(DeleteView):
+    model = MenuItem
+    template_name = "inventory/menuitem_delete_form.html"
+    success_url = "/menuitems"
+
+
+class MenuItemCreateView(CreateView):
+    model = MenuItem
+    template_name = "inventory/menuitem_create_form.html"
+    success_url = "/menuitems"
+    fields = "__all__"
+
+
+class MenuItemUpdateView(UpdateView):
+    model = MenuItem
+    template_name = "inventory/menuitem_update_form.html"
+    success_url = "/menuitems"
+    fields = "__all__"
+
+
+class MenuItemListView(ListView):
+    model = MenuItem
+    template_name = "inventory/menuitem_view.html"
