@@ -25,6 +25,7 @@ th,
 td {
   border: 1px solid rgb(160 160 160);
   padding: 8px 10px;
+  margin: auto;
 }
 
 td {
@@ -33,6 +34,20 @@ td {
 
 tfoot {
   font-weight: bold;
-  background-color: rgb(106, 255, 100);
+  background-color: rgb(108, 250, 103);
+}
+
+.caption {
+  text-align: center;
+}
+
+.update_button {
+  font-weight: bold;
+  background-color: rgb(88, 213, 255);
+}
+
+.delete_button {
+  font-weight: bold;
+  background-color: rgb(255, 123, 123);
 }
 

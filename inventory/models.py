@@ -27,7 +27,12 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.FloatField()
     unit = models.CharField(max_length=10, choices=unit.items())
-    unit_price = models.FloatField(verbose_name="Price per unit")
+    unit_price = models.DecimalField(
+        decimal_places=1, max_digits=5, verbose_name="Price per unit"
+    )
+
+    def get_absolute_url(self):
+        return "/ingredient"
 
     def __str__(self):
         return self.name
@@ -35,28 +40,22 @@ class Ingredient(models.Model):
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
-    price = models.FloatField()
-    menu_items = models.ManyToManyField(
-        Ingredient, through="RecipeRequirement", related_name="menu_items_for_menu_item"
-    )
+    price = models.DecimalField(decimal_places=2, max_digits=5)
 
     def __str__(self):
         return f"{self.name} - ${self.price}"
 
-    def available(self):
-        return all(X.enough() for X in self.reciperequirement_set.all())
+    def get_absolute_url(self):
+        return "/menuitem"
 
 
 class RecipeRequirement(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.FloatField()
+    quantity = models.DecimalField(decimal_places=1, max_digits=4)
 
-    def __str__(self):
-        return f"{self.menu_item.name} needs {self.quantity}x {self.ingredient.name}"
-
-    def enough(self):
-        return self.quantity <= self.ingredient.quantity
+    def get_absolute_url(self):
+        return "/reciperequirement"
 
 
 class Purchase(models.Model):
@@ -70,8 +69,23 @@ class Purchase(models.Model):
     """
 
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
     timestamp = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"{self.menu_item.name} - {self.quantity} @ {self.timestamp}"
+    def get_absolute_url(self):
+        return "/Purchase"
+
+    """ The sum of the unit_price for each ingredient used in a menu_item"""
+
+    def get_cost(self):
+        recipe_objects = RecipeRequirement.objects.filter(menu_item=self.menu_item)
+        return sum([z.ingredient.unit_price * z.quantity for z in recipe_objects])
+
+    """ The price of the menu_item"""
+
+    def get_revenue(self):
+        return self.menu_item.price
+
+    """ The revenue - the cost"""
+
+    def get_profit(self):
+        return float(self.get_revenue()) - float(self.get_cost())

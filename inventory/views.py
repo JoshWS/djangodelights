@@ -18,45 +18,45 @@ class HomeView(TemplateView):
 class IngredientDeleteView(DeleteView):
     model = Ingredient
     template_name = "inventory/ingredient_delete_form.html"
-    success_url = "/ingredients"
+    success_url = "/ingredient"
 
 
 class IngredientCreateView(CreateView):
     model = Ingredient
     template_name = "inventory/ingredient_create_form.html"
-    success_url = "/ingredients"
+    success_url = "/ingredient"
     fields = "__all__"
 
 
 class IngredientUpdateView(UpdateView):
     model = Ingredient
     template_name = "inventory/ingredient_update_form.html"
-    success_url = "/ingredients"
+    success_url = "/ingredient"
     fields = "__all__"
 
 
 class IngredientsListView(ListView):
     model = Ingredient
-    template_name = "inventory/ingredients_view.html"
+    template_name = "inventory/ingredient_view.html"
 
 
 class PurchaseDeleteView(DeleteView):
     model = Purchase
     template_name = "inventory/purchase_delete_form.html"
-    success_url = "/purchases"
+    success_url = "/purchase"
 
 
 class PurchaseCreateView(CreateView):
     model = Purchase
     template_name = "inventory/purchase_create_form.html"
-    success_url = "/purchases"
+    success_url = "/purchase"
     fields = "__all__"
 
 
 class PurchaseUpdateView(UpdateView):
     model = Purchase
     template_name = "inventory/purchase_update_form.html"
-    success_url = "/purchases"
+    success_url = "/purchase"
     fields = "__all__"
 
 
@@ -68,23 +68,48 @@ class PurchasesListView(ListView):
 class MenuItemDeleteView(DeleteView):
     model = MenuItem
     template_name = "inventory/menuitem_delete_form.html"
-    success_url = "/menuitems"
+    success_url = "/menuitem"
 
 
 class MenuItemCreateView(CreateView):
     model = MenuItem
     template_name = "inventory/menuitem_create_form.html"
-    success_url = "/menuitems"
+    success_url = "/menuitem"
     fields = "__all__"
 
 
 class MenuItemUpdateView(UpdateView):
     model = MenuItem
     template_name = "inventory/menuitem_update_form.html"
-    success_url = "/menuitems"
+    success_url = "/menuitem"
     fields = "__all__"
 
 
 class MenuItemListView(ListView):
     model = MenuItem
     template_name = "inventory/menuitem_view.html"
+
+
+class RecipeRequirementDeleteView(DeleteView):
+    model = RecipeRequirement
+    template_name = "inventory/reciperequirement_delete_form.html"
+    success_url = "/reciperequirement"
+
+
+class RecipeRequirementCreateView(CreateView):
+    model = RecipeRequirement
+    template_name = "inventory/reciperequirement_create_form.html"
+    success_url = "/reciperequirement"
+    fields = "__all__"
+
+
+class RecipeRequirementUpdateView(UpdateView):
+    model = RecipeRequirement
+    template_name = "inventory/reciperequirement_update_form.html"
+    success_url = "/reciperequirement"
+    fields = "__all__"
+
+
+class RecipeRequirementListView(ListView):
+    model = RecipeRequirement
+    template_name = "inventory/reciperequirement_view.html"
