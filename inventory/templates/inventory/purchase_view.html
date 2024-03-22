@@ -4,7 +4,7 @@
 <div>
     <table>
         <thead>
-          <tr><th colspan="6">Purchases</th></tr>
+          <tr  class='caption'><th colspan="6">Purchases</th></tr>
             <tr>
               <th scope="col">menu_item</th>
               <th scope="col">timestamp</th>
@@ -12,6 +12,9 @@
             </tr>
           </thead>
         <tbody>
+        {% if failed == False %}
+        <div class="alert alert-success" role="alert">Purchase made successfully</div>
+        {% endif %}
         {% for Item in object_list %}
         <th scope="row">{{ Item.menu_item }}</th>
             <td> {{ Item.timestamp }}</td>
@@ -32,7 +35,10 @@
     </tbody>
     <tfoot>
         <tr>
-          <td colspan="6"><a href="{% url 'purchase_create' %}">Add a new purchase</a></td>
+          <td colspan="6"><a style="text-decoration:none", href="{% url 'purchase_create' %}">Add a new purchase</a></td>
+          {% if form.errors %}
+          <p>Not enough ingredients</p>
+          {% endif %}
         </tr>
       </tfoot>
     </table>

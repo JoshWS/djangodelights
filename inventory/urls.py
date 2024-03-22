@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from .views import *
 
 urlpatterns = [
@@ -61,4 +62,7 @@ urlpatterns = [
         RecipeRequirementDeleteView.as_view(),
         name="reciperequirement_delete",
     ),
+    path("finances/", FinancesView.as_view(), name="finances"),
+    path("logout/", log_out, name="logout"),
+    path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
 ]

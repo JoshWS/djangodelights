@@ -27,9 +27,10 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.FloatField()
     unit = models.CharField(max_length=10, choices=unit.items())
-    unit_price = models.DecimalField(
-        decimal_places=1, max_digits=5, verbose_name="Price per unit"
-    )
+    unit_price = models.FloatField(verbose_name="Price per unit")
+
+    def available(self):
+        return all(X.enough() for X in self.reciperequirement_set.all())
 
     def get_absolute_url(self):
         return "/ingredient"
@@ -40,7 +41,7 @@ class Ingredient(models.Model):
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
-    price = models.DecimalField(decimal_places=2, max_digits=5)
+    price = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.name} - ${self.price}"
@@ -52,7 +53,10 @@ class MenuItem(models.Model):
 class RecipeRequirement(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.DecimalField(decimal_places=1, max_digits=4)
+    quantity = models.FloatField(default=0)
+
+    def enough(self):
+        return self.quantity <= self.ingredient.quantity
 
     def get_absolute_url(self):
         return "/reciperequirement"
