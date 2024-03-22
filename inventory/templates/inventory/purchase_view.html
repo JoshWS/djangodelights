@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+          <tr  class='caption'><th colspan="6">Purchases</th></tr>
+            <tr>
+              <th scope="col">menu_item</th>
+              <th scope="col">timestamp</th>
+              <th scope="col" colspan="2"></th>
+            </tr>
+          </thead>
+        <tbody>
+        {% if failed == False %}
+        <div class="alert alert-success" role="alert">Purchase made successfully</div>
+        {% endif %}
+        {% for Item in object_list %}
+        <th scope="row">{{ Item.menu_item }}</th>
+            <td> {{ Item.timestamp }}</td>
+            <td class="update_button">
+                <a style="text-decoration:none", href="{% url 'purchase_update' Item.id %}">Update</a>
+            </td>
+            <td class="delete_button">
+                <a style="text-decoration:none", href="{% url 'purchase_delete' Item.id %}">❌</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4">No purchases yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+          <td colspan="6"><a style="text-decoration:none", href="{% url 'purchase_create' %}">Add a new purchase</a></td>
+          {% if form.errors %}
+          <p>Not enough ingredients</p>
+          {% endif %}
+        </tr>
+      </tfoot>
+    </table>
+</div>
+
+{% endblock %}

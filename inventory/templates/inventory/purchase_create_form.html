@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h2>Add a new Purchase</h2>
+<form method="post">{% csrf_token %}
+  {% if failed == True %}
+    <div class="alert alert-danger" role="alert">Not enough ingredients to make this purchase</div>
+  {% endif %} 
+  <div>
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+          <tr class='caption'><th colspan="6">Menu items</th></tr>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col" colspan="2"></th>
+            </tr>
+          </thead>
+        <tbody>
+        {% for Item in object_list %}
+        <th scope="row">{{ Item.name }}</th>
+            <td> {{ Item.price }}</td> 
+            <td class="update_button">
+                <a style="text-decoration:none", href="{% url 'menuitem_update' Item.id %}">Update</a>
+            </td>
+            <td class="delete_button">
+                <a style="text-decoration:none", href="{% url 'menuitem_delete' Item.id %}">❌</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4">No menu items yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+          <td colspan="6"><a style="text-decoration:none", href="{% url 'menuitem_create' %}">Add a new menu item</a></td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+
+{% endblock %}

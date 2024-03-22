@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+          <tr  class='caption'><th colspan="6">Recipe Requirements</th></tr>
+            <tr>
+              <th scope="col">Menu Item</th>
+              <th scope="col">Ingredient</th>
+              <th scope="col">Quantity</th>
+              <th scope="col" colspan="2"></th>
+            </tr>
+          </thead>
+        <tbody>
+        {% for Item in object_list %}
+        <th scope="row">{{ Item.menu_item }}</th>
+            <td> {{ Item.ingredient }}</td>
+            <td> {{ Item.quantity }}</td>
+            <td class="update_button">
+                <a style="text-decoration:none", href="{% url 'reciperequirement_update' Item.id %}">Update</a>
+            </td>
+            <td class="delete_button">
+                <a style="text-decoration:none", href="{% url 'reciperequirement_delete' Item.id %}">❌</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4">No recipe requirements yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+          <td colspan="6"><a style="text-decoration:none", href="{% url 'reciperequirement_create' %}">Add a new recipe requirement</a></td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+
+{% endblock %}

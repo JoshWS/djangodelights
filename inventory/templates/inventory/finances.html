@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+          <tr  class='caption'><th colspan="6">Finances</th></tr>
+            <tr>
+              <th scope="col">Total Cost</th>
+              <th scope="col">Total Revenue</th>
+              <th scope="col">Total Profit</th>
+            </tr>
+          </thead>
+        <tbody>
+          <tr>
+            <td> {{ total_cost }}</td>
+            <td> {{ total_revenue }}</td>
+            <td> {{ total_profit }}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

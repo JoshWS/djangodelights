@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+          <tr  class='caption'><th colspan="6">List of ingredients in stock</th></tr>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Price</th>
+              <th scope="col" colspan="2"></th>
+            </tr>
+          </thead>
+        <tbody>
+        {% for Item in object_list %}
+        <th scope="row">{{ Item.name }}</th>
+            <td> {{ Item.quantity }}</td>
+            <td> {{ Item.unit }}</td>
+            <td> ${{ Item.unit_price}}</td>
+            <td class="update_button">
+                <a style="text-decoration:none", href="{% url 'ingredient_update' Item.id %}">Update</a>
+            </td>
+            <td class="delete_button">
+                <a style="text-decoration:none", href="{% url 'ingredient_delete' Item.id %}">❌</a>
+            </td>
+
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="4">No ingredients yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+          <td colspan="6"><a style="text-decoration:none", href="{% url 'ingredient_create' %}">Add a new Ingredient</a></td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+
+{% endblock %}

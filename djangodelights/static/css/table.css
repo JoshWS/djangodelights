@@ -1,0 +1,53 @@
+thead,
+tfoot {
+  background-color: #2c5e77;
+  color: #fff;
+}
+
+tbody {
+  background-color: #e4f0f5;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+  margin: auto;
+}
+
+td {
+  text-align: center;
+}
+
+tfoot {
+  font-weight: bold;
+  background-color: rgb(108, 250, 103);
+}
+
+.caption {
+  text-align: center;
+}
+
+.update_button {
+  font-weight: bold;
+  background-color: rgb(88, 213, 255);
+}
+
+.delete_button {
+  font-weight: bold;
+  background-color: rgb(255, 123, 123);
+}
+
