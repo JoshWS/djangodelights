@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 
 
 # Create your views here.
-class HomeView(LoginRequiredMixin, TemplateView):
+class HomeView(TemplateView):
     template_name = "inventory/home.html"
 
 
